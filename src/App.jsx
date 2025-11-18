@@ -1,68 +1,37 @@
+import { useState } from 'react'
+import Navbar from './components/Navbar'
+import RequestForm from './components/RequestForm'
+import Nearby from './components/Nearby'
+import RegisterAmbulance from './components/RegisterAmbulance'
+
 function App() {
+  const [tab, setTab] = useState('request')
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_50%)]"></div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(239,68,68,0.15),transparent_40%),radial-gradient(circle_at_70%_60%,rgba(59,130,246,0.12),transparent_40%)]" />
 
-      <div className="relative min-h-screen flex items-center justify-center p-8">
-        <div className="max-w-2xl w-full">
-          {/* Header with Flames icon */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center mb-6">
-              <img
-                src="/flame-icon.svg"
-                alt="Flames"
-                className="w-24 h-24 drop-shadow-[0_0_25px_rgba(59,130,246,0.5)]"
-              />
-            </div>
+      <div className="relative max-w-5xl mx-auto px-6 py-10">
+        <Navbar current={tab} onChange={setTab} />
 
-            <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">
-              Flames Blue
-            </h1>
-
-            <p className="text-xl text-blue-200 mb-6">
-              Build applications through conversation
-            </p>
+        <div className="mt-8 grid lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-6">
+            {tab === 'request' && <RequestForm />}
+            {tab === 'nearby' && <Nearby />}
+            {tab === 'register' && <RegisterAmbulance />}
           </div>
 
-          {/* Instructions */}
-          <div className="bg-slate-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-8 shadow-xl mb-6">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                1
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Describe your idea</h3>
-                <p className="text-blue-200/80 text-sm">Use the chat panel on the left to tell the AI what you want to build</p>
-              </div>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 text-white/80">
+            <h3 className="text-white font-semibold mb-2">How it works</h3>
+            <ol className="list-decimal list-inside space-y-2 text-sm">
+              <li>Share the pickup location and priority.</li>
+              <li>We match you with the closest available ambulance.</li>
+              <li>Track status until you reach the hospital.</li>
+            </ol>
+            <div className="mt-4 text-xs text-white/60">
+              Focused on Ethiopia: local phone support and region-aware defaults.
             </div>
-
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                2
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Watch it build</h3>
-                <p className="text-blue-200/80 text-sm">Your app will appear in this preview as the AI generates the code</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                3
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Refine and iterate</h3>
-                <p className="text-blue-200/80 text-sm">Continue the conversation to add features and make changes</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="text-center">
-            <p className="text-sm text-blue-300/60">
-              No coding required • Just describe what you want
-            </p>
+            <a href="/test" className="inline-block mt-6 text-xs bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded">System status</a>
           </div>
         </div>
       </div>
